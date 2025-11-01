@@ -2,7 +2,7 @@ import multer from "multer";
 import path from "path";
 
 // 1️⃣ Ensure temp folder exists
-const tempDir = path.join(process.cwd(), "Server/public/temp");
+const tempDir = path.join(process.cwd(), "/public/temp");
 
 
 // 2️⃣ Multer storage

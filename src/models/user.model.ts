@@ -2,14 +2,7 @@ import mongoose, { Schema, Document } from 'mongoose';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
-if (
-  !process.env.ACCESS_TOKEN_SECRET ||
-  !process.env.REFRESH_TOKEN_SECRET
-) {
-  throw new Error(
-    'JWT secrets (ACCESS_TOKEN_SECRET, REFRESH_TOKEN_SECRET) are not defined in .env'
-  );
-}
+
 
 // --- TypeScript Interface ---
 // This defines the structure of the User document for TypeScript
@@ -97,15 +90,6 @@ userSchema.methods.isPasswordCorrect = async function (password: string) {
   return await bcrypt.compare(password, this.password);
 };
 
-// Check for the *specific* env variables you are using
-if (
-  !process.env.ACCESS_TOKEN_SECRET ||
-  !process.env.REFRESH_TOKEN_SECRET
-) {
-  throw new Error(
-    'ACCESS_TOKEN_SECRET or REFRESH_TOKEN_SECRET is not defined in environment variables'
-  );
-}
 
 // Custom method to generate JWT Access Token
 userSchema.methods.generateAccessToken = function () {
@@ -117,9 +101,9 @@ userSchema.methods.generateAccessToken = function () {
       fullName: this.fullName,
       role: this.role, // <-- Added role to token
     },
-    process.env.ACCESS_TOKEN_SECRET!, // Added '!' to satisfy TypeScript
+    process.env.ACCESS_TOKEN_SECRET, // Added '!' to satisfy TypeScript
     {
-      expiresIn: process.env.ACCESS_TOKEN_EXPIRY || '1d', // Added fallback
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY , // Added fallback
     }
   );
 };

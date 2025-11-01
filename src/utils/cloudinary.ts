@@ -7,6 +7,10 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+
+
+
+
 const safeUnlink = (path?: string | null) => {
   if (!path) return;
   try {
@@ -30,6 +34,7 @@ const uploadOnCloudinary = async (localFilePath?: string | null): Promise<any | 
     return response;
   } catch (error) {
     // remove the locally saved temporary file as the upload operation got failed
+    console.error("❌ Cloudinary upload failed:", error);
     safeUnlink(localFilePath);
     return null;
   }
