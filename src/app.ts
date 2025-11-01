@@ -18,8 +18,12 @@ app.use(cookieParser());
 import userRouter from './routes/user.routes.js';
 import wasteRouter from './routes/waste.routes.js';
 import binRouter from './routes/bin.routes.js';
+import pickupRouter from './routes/pickup.routes.js';
+import rewardRouter from './routes/reward.routes.js';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/waste', wasteRouter);
 app.use('/api/v1/bin', binRouter);
+app.use('/api/v1/pickup', pickupRouter);
+app.use('/api/v1/rewards', rewardRouter);
 export default app;
