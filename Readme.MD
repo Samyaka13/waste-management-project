@@ -59,16 +59,17 @@ Based on the SIH 2025 challenge, the core issue is the **failure of at-source wa
 
 ## 📁 5. Project Structure
 
+```bash
 src/
-├── controllers/ # Business logic (e.g., registerUser)
-├── db/ # Database connection logic
-├── middlewares/ # verifyJWT, verifyRole, etc.
-├── models/ # Mongoose schemas (User, Bin, Waste, Pickup, Reward)
-├── routes/ # API endpoint definitions
-├── utils/ # Helper utilities (ApiError, ApiResponse, cloudinary)
-├── app.ts # Express app configuration
-├── constants.ts # Project constants (e.g., DB_NAME)
-└── index.ts # Server entry point (connects DB, starts server)
+├── controllers/       # Business logic (e.g., registerUser)
+├── db/                # Database connection logic
+├── middlewares/       # Custom middleware (e.g., verifyJWT, verifyRole)
+├── models/            # Mongoose schemas (User, Bin, Waste, Pickup, Reward)
+├── routes/            # API endpoint definitions
+├── utils/             # Helper utilities (ApiError, ApiResponse, cloudinary)
+├── app.ts             # Express app configuration
+├── constants.ts       # Project constants (e.g., DB_NAME)
+└── index.ts           # Server entry point (connects DB, starts server)
 
 ---
 
