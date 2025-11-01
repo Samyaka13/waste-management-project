@@ -1,6 +1,6 @@
 
 import { Router } from 'express';
-import { loginUser, logoutUser, registerUser } from '../controllers/user.controller.js';
+import { getCurrentUser, loginUser, logoutUser, registerUser } from '../controllers/user.controller.js';
 import { upload } from '../middlewares/multer.middleware.js';
 import { verifyJWT } from '../middlewares/auth.middleware.js';
 
@@ -19,5 +19,6 @@ router.route('/login').post(loginUser);
 
 // Logout User: POST /api/v1/users/logout
 router.route('/logout').post(verifyJWT, logoutUser);
+router.route('/me').post(verifyJWT, getCurrentUser);
 
 export default router;

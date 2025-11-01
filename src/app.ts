@@ -17,7 +17,9 @@ app.use(cookieParser());
 //importing routes here 
 import userRouter from './routes/user.routes.js';
 import wasteRouter from './routes/waste.routes.js';
+import binRouter from './routes/bin.routes.js';
 
 app.use('/api/v1/users', userRouter);
 app.use('/api/v1/waste', wasteRouter);
+app.use('/api/v1/bin', binRouter);
 export default app;

@@ -155,4 +155,23 @@ const logoutUser = asyncHandler(async (req: Request, res: Response) => {
     .json(new ApiResponse(200, {}, 'User logged out successfully'));
 });
 
-export { registerUser, loginUser, logoutUser };
+const getCurrentUser = asyncHandler(async (req: Request, res: Response) => {
+  // 'verifyJWT' middleware already ran and attached 'req.user'
+  const user = (req as any).user;
+
+  if (!user) {
+    throw new ApiError(401, 'Unauthorized request');
+  }
+
+  // We already have the user data from the middleware,
+  // but we can re-fetch from DB if we want the absolute latest.
+  // For this, the data from the token is sufficient.
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(200, user, 'User details fetched successfully')
+    );
+});
+
+export { registerUser, loginUser, logoutUser , getCurrentUser};

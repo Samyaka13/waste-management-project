@@ -97,4 +97,92 @@ const logWaste = asyncHandler(async (req: Request, res: Response) => {
   }
 });
 
-export { logWaste };
+const getWasteAnalytics = asyncHandler(async (req: Request, res: Response) => {
+  const userId = (req as any).user?._id;
+
+  if (!userId) {
+    throw new ApiError(401, 'Unauthorized request. No user found.');
+  }
+
+  // Use the MongoDB Aggregation Pipeline to get analytics
+  const analytics = await WasteEntry.aggregate([
+    {
+      $match: {
+        user: new mongoose.Types.ObjectId(userId), // Match only the logged-in user
+      },
+    },
+    {
+      $group: {
+        _id: '$wasteType', // Group by the wasteType field
+        totalWeight: { $sum: '$weight' }, // Sum the weight for each group
+        count: { $sum: 1 }, // Count the number of entries for each group
+      },
+    },
+    {
+      $project: {
+        _id: 0, // Exclude the default _id
+        wasteType: '$_id', // Rename _id to wasteType
+        totalWeight: 1,
+        count: 1,
+      },
+    },
+  ]);
+
+  if (!analytics) {
+    throw new ApiError(404, 'No analytics data found for this user');
+  }
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        analytics,
+        'Waste analytics fetched successfully'
+      )
+    );
+});
+
+
+// --- NEW: Get Waste History (Paginated) ---
+const getWasteHistory = asyncHandler(async (req: Request, res: Response) => {
+  const userId = (req as any).user?._id;
+
+  // Get page and limit from query params, with defaults
+  const page = parseInt(req.query.page as string) || 1;
+  const limit = parseInt(req.query.limit as string) || 10;
+  const skip = (page - 1) * limit;
+
+  if (!userId) {
+    throw new ApiError(401, 'Unauthorized request. No user found.');
+  }
+
+  // Find all waste entries for the user, sort by newest, paginate
+  const wasteHistory = await WasteEntry.find({ user: userId })
+    .sort({ createdAt: -1 }) // Sort by newest first
+    .skip(skip)
+    .limit(limit);
+
+  const totalEntries = await WasteEntry.countDocuments({ user: userId });
+  const totalPages = Math.ceil(totalEntries / limit);
+
+  const paginatedResult = {
+    data: wasteHistory,
+    pagination: {
+      currentPage: page,
+      totalPages: totalPages,
+      totalEntries: totalEntries,
+    },
+  };
+
+  return res
+    .status(200)
+    .json(
+      new ApiResponse(
+        200,
+        paginatedResult,
+        'Waste history fetched successfully'
+      )
+    );
+});
+export { logWaste,getWasteAnalytics,getWasteHistory };
