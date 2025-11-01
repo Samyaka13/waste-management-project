@@ -103,8 +103,11 @@ ACCESS_TOKEN_SECRET=youraccesstokensecret
 ACCESS_TOKEN_EXPIRY=1d
 REFRESH_TOKEN_SECRET=yourrefreshtokensecret
 REFRESH_TOKEN_EXPIRY=10d
+```
 
 # Cloudinary
+
+```bash
 CLOUDINARY_CLOUD_NAME=your_cloud_name
 CLOUDINARY_API_KEY=your_api_key
 CLOUDINARY_API_SECRET=your_api_secret
