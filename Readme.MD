@@ -70,9 +70,9 @@ src/
 ├── app.ts             # Express app configuration
 ├── constants.ts       # Project constants (e.g., DB_NAME)
 └── index.ts           # Server entry point (connects DB, starts server)
-
 ---
 
+```
 ## ⚙️ 6. Getting Started
 
 ### **Prerequisites**
