@@ -88,5 +88,25 @@ src/
    cd backend
 
 2. **Install dependencies**
+
 `npm install`
 
+3. **Create .env file**
+`PORT=5000`
+
+# MongoDB
+`MONGODB_URI=mongodb+srv://<username>:<password>@cluster.xxxxx.mongodb.net`
+
+# JWT
+```ACCESS_TOKEN_SECRET=youraccesstokensecret
+ACCESS_TOKEN_EXPIRY=1d
+REFRESH_TOKEN_SECRET=yourrefreshtokensecret
+REFRESH_TOKEN_EXPIRY=10d``
+
+# Cloudinary
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# CORS
+CORS_ORIGIN=*
