@@ -174,7 +174,6 @@ CLOUDINARY_API_SECRET=your_api_secret
 | GET    | `/`                 | User       | Fetch all available rewards.        |
 | POST   | `/redeem/:rewardId` | User       | Redeem a reward using ecoCoins.     |
 
-
 ## 🧠 8. Summary
 
 RoboSort combines **AI**, **IoT**, and **gamified incentives** to build a smart and sustainable waste management ecosystem.  
@@ -184,13 +183,8 @@ By rewarding eco-friendly actions, it aims to make **at-source waste segregation
 
 ## 🛠️ 9. Scripts
 
-| Command | Description |
-|----------|--------------|
-| `npm run dev` | Run the server in development mode (with tsx). |
-| `npm run build` | Build TypeScript project for production. |
-| `npm start` | Start compiled server. |
-
-
-
-
-
+| Command         | Description                                    |
+| --------------- | ---------------------------------------------- |
+| `npm run dev`   | Run the server in development mode (with tsx). |
+| `npm run build` | Build TypeScript project for production.       |
+| `npm start`     | Start compiled server.                         |
